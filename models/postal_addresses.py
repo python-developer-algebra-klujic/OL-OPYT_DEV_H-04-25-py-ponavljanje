@@ -4,6 +4,7 @@
 
 class PostalAddress:
     def __init__(self, street, house_number, postal_code, city, country):
+        self.id = 1
         self.street = street
         self.house_number = house_number
         self.postal_code = postal_code

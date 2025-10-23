@@ -4,6 +4,7 @@
 
 class Invoice:
     def __init__(self, invoice_number, invoice_date, due_date, client, items=[], tax_rate=0.25):
+        self.id = 1
         self.invoice_number = invoice_number
         self.invoice_date = invoice_date
         self.due_date = due_date
