@@ -1,0 +1,14 @@
+[
+    {
+        "email_address": "pero@email.com",
+        "email_type": "Work"
+    },
+    {
+        "email_address": "pero@email.com",
+        "email_type": "Work"
+    },
+    {
+        "email_address": "iva@email.com",
+        "email_type": "Private"
+    }
+]
