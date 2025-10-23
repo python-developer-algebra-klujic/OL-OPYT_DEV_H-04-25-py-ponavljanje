@@ -62,6 +62,8 @@ def main():
     email_repo.save_email(email_address)
     new_email = Email("iva@email.com", "Private")
     email_repo.save_email(new_email)
+    new_email = Email("iva@email.com", "Business")
+    email_repo.save_email(new_email)
 
 
 

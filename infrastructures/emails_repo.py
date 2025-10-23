@@ -12,6 +12,7 @@ class EmailsRepo:
         self.emails = self.get_all_emails()
 
     def save_email(self, email: Email):
+        email.id = self._get_email_id()
         self.emails.append(email)
         emails_dicts = [self._email_to_dict(email) for email in self.emails]
         with open(self.file_path, "w") as file_writer:
@@ -31,10 +32,20 @@ class EmailsRepo:
             return []
 
     def _dict_to_email(self, email_dict: Dict):
-        return Email(email_dict['email_address'], email_dict['email_type'])
+        return Email(self._get_email_id(),
+                     email_dict['email_address'],
+                     email_dict['email_type'])
 
     def _email_to_dict(self, email: Email):
-        return {'email_address': email.email_address, 'email_type': email.email_type}
+        return {'id': email.id,
+                'email_address': email.email_address,
+                'email_type': email.email_type}
+
+    def _get_email_id(self) -> int:
+        if len(self.emails) == 0:
+            return 1
+        else:
+            return self.emails[-1].id + 1
 
 
 '''
