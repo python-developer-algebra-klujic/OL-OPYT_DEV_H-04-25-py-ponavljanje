@@ -1,107 +1,15 @@
-import models.clients as clients
-
-
-
-
-
-class PostalAddress:
-    def __init__(self, street, house_number, postal_code, city, country):
-        self.street = street
-        self.house_number = house_number
-        self.postal_code = postal_code
-        self.city = city
-        self.country = country
-
-    def __str__(self):
-        return f"{self.street} {self.house_number}, {self.postal_code} {self.city}, {self.country}"
-
-
-class Email:
-    def __init__(self, email_address, email_type):
-        self.email_address = email_address
-        self.email_type = email_type
-
-    def __str__(self):
-        return f"{self.email_address} ({self.email_type})"
-
-
-class Invoice:
-    def __init__(self, invoice_number, invoice_date, due_date, client, items=[], tax_rate=0.25):
-        self.invoice_number = invoice_number
-        self.invoice_date = invoice_date
-        self.due_date = due_date
-        self.client = client
-        self.items = items
-        self.tax_rate = tax_rate
-        self.subtotal, self.tax, self.total = self.calculate_totals()
-        self.qr_code = 'Ovo je QR Code'  # Placeholder for QR code generation
-
-    def calculate_totals(self):
-        subtotal = sum(item.total_price for item in self.items)
-        tax = subtotal * self.tax_rate
-        total = subtotal + tax
-        return subtotal, tax, total
-
-    def print_invoice(self):
-        print(f"Invoice Number: {self.invoice_number}")
-        print(f"Invoice Date: {self.invoice_date}")
-        print(f"Due Date: {self.due_date}")
-        print(f"Bill To: {self.client}")
-        print(f"Address: {self.client.postal_address}\n")
-        print(f"Emil: {self.client.email}\n")
-        print(f"Phone: {self.client.phone}\n")
-        print("Items:")
-        for item in self.items:
-            print(item)
-        print(f"\nSubtotal: {self.subtotal:.2f} €")
-        print(f"Tax (25%): {self.tax:.2f} €")
-        print(f"Total: {self.total:.2f} €")
-
-    def add_item(self, item):
-        self.items.append(item)
-        self.subtotal, self.tax, self.total = self.calculate_totals()
-
-    def __str__(self):
-        return f"Invoice({self.invoice_number}, Total: {self.total:.2f} €)"
-
-
-class InvoiceItem:
-    def __init__(self, description, quantity, unit_price):
-        self.description = description
-        self.quantity = quantity
-        self.unit_price = unit_price
-        self.total_price = self.calcualte_total_price()
-
-    def calcualte_total_price(self):
-        return self.quantity * self.unit_price
-
-    def __str__(self):
-        return f"- {self.description}, {self.quantity} x {self.unit_price:.2f} €, Total: {self.total_price:.2f} €"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# import models.clients as clients
+from models.clients import Client
+from models.emails import Email
+from models.invoices import Invoice
+from models.invoice_items import InvoiceItem
+from models.postal_addresses import PostalAddress
 
 
 
 postal_address = PostalAddress("Ulica Primjera", "10A", "10000", "Zagreb", "Hrvatska")
 email_address = Email("pero@email.com", "Work")
-pero_peric = clients.Client("Pero", "Peric", postal_address, email_address, "+38591234567")
+pero_peric = Client("Pero", "Peric", postal_address, email_address, "+38591234567")
 
 
 invoice = Invoice(
