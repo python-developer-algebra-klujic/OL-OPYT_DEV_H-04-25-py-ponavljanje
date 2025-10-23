@@ -1,10 +1,9 @@
 # import models.clients as clients
-from models.clients import Client
-from models.emails import Email
-from models.invoices import Invoice
-from models.invoice_items import InvoiceItem
-from models.postal_addresses import PostalAddress
-
+from models import (Client,
+                    Email,
+                    Invoice,
+                    InvoiceItem,
+                    PostalAddress)
 
 
 postal_address = PostalAddress("Ulica Primjera", "10A", "10000", "Zagreb", "Hrvatska")
